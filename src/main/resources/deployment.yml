@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
         - name: spring-mongo-service
-          image: spring-mongo-service:1.0
+          image: zydiii/spring-mongo-service:1.6
           imagePullPolicy: Never
           ports:
             - containerPort: 8080
@@ -35,20 +35,20 @@ spec:
             - name: MONGO_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: mongo-secret
-                  key: username
+                  name: mongodb-secret
+                  key: mongo-root-username
             - name: MONGO_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: mongo-secret
-                  key: password
+                  name: mongodb-secret
+                  key: mongo-root-password
             - name: MONGO_DB
               valueFrom:
                 configMapKeyRef:
-                  name: mongo-conf
+                  name: mongodb-configmap
                   key: database_name
             - name: MONGO_HOST
               valueFrom:
                 configMapKeyRef:
-                  name: mongo-conf
+                  name: mongodb-configmap
                   key: database_url
